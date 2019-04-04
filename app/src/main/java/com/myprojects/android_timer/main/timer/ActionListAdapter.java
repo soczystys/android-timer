@@ -1,4 +1,4 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main.timer;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,8 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.util.BunchOfDataToSave;
+import com.myprojects.android_timer.main.util.PlayButtonHandler;
 
 import java.util.List;
 
@@ -23,6 +26,14 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     final PlayButtonHandler playButtonHandler;
     Drawable play;
     Drawable pause;
+
+    public BunchOfDataToSave getBunchOfDataToSave() {
+        if(playButtonHandler != null) {
+            return playButtonHandler.getBunchOfDataToSave();
+        } else {
+            return null;
+        }
+    }
 
     public ActionListAdapter(List<RecyclerItem> list, Context context, TextView count, Drawable play, Drawable pause) {
         this.list = list;
@@ -49,7 +60,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playButtonHandler.handlePlayButton(count, holder.playButton);
+                playButtonHandler.handlePlayButton(count, holder.playButton, holder.title.getText().toString());
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main.util;
 
 import android.widget.TextView;
 
@@ -11,6 +11,11 @@ public class ButtonProperty {
     private Runnable runnable = null;
     private Boolean isReadyToCancel = false;
     private TimeUtil timeUtil = new TimeUtil();
+    private String title;
+
+    public ButtonProperty(String title) {
+        this.title = title;
+    }
 
     public Timer getTimer() {
         return timer;
@@ -29,6 +34,7 @@ public class ButtonProperty {
     }
 
     public void setTask(final TextView textView) {
+        timeUtil.setBeginning();
         task = new TimerTask() {
             @Override
             public void run() {
@@ -53,6 +59,7 @@ public class ButtonProperty {
         if (isReadyToCancel) {
             timer.cancel();
         }
+        timeUtil.setEnd();
     }
 
     public void clearTime() {
@@ -63,5 +70,11 @@ public class ButtonProperty {
         return isReadyToCancel;
     }
 
+    public TimeUtil getTimeUtil() {
+        return timeUtil;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 }

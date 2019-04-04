@@ -1,4 +1,4 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main.util;
 
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
@@ -6,9 +6,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class PlayButtonHandler {
 
@@ -16,6 +13,7 @@ public class PlayButtonHandler {
     private boolean isCancelled = false;
     private Map<FloatingActionButton, ButtonProperty> buttonsHandlers = new HashMap<>();
     private FloatingActionButton buttonPreviouslyClicked;
+    private FloatingActionButton buttonCurrentlyClicked;
     private Drawable play;
     private Drawable pause;
 
@@ -24,10 +22,18 @@ public class PlayButtonHandler {
         this.pause = pause;
     }
 
-    public void handlePlayButton(final TextView textView, final FloatingActionButton button) {
+    public BunchOfDataToSave getBunchOfDataToSave() {
+        ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
+        TimeUtil timeUtil = buttonProperty.getTimeUtil();
+        return new BunchOfDataToSave(buttonProperty.getTitle(),
+                timeUtil.getSec(), timeUtil.getMin(), timeUtil.getHour(), timeUtil.getBeginning(), timeUtil.getEnd());
+    }
+
+    public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title) {
+        buttonCurrentlyClicked = button;
         isCancelled = false;
         if (!buttonsHandlers.containsKey(button)) {
-            buttonsHandlers.put(button, new ButtonProperty());
+            buttonsHandlers.put(button, new ButtonProperty(title));
         }
 
         changeStatusPlaying();

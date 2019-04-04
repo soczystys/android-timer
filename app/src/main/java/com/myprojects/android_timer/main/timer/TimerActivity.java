@@ -1,12 +1,17 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main.timer;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
+
+import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.data.DataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,10 @@ public class TimerActivity extends AppCompatActivity {
     private Resources resources;
     private Drawable play;
     private Drawable pause;
-
+    private FloatingActionButton saveButton;
+    private RecyclerView recyclerView;
+    private ActionListAdapter adapter;
+    private DataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,18 @@ public class TimerActivity extends AppCompatActivity {
         count = findViewById(R.id.main_text);
         initList();
         initRecyclerView();
+        initSaveButton();
+        dataSource = DataSource.getInstance();
+    }
+
+    private void initSaveButton() {
+        saveButton = findViewById(R.id.fab_save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataSource.setLog(adapter.getBunchOfDataToSave());
+            }
+        });
     }
 
     private void initResources() {
@@ -37,8 +57,8 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recycler_main);
-        ActionListAdapter adapter = new ActionListAdapter(actions, this, count, play, pause);
+        recyclerView = findViewById(R.id.recycler_main);
+        adapter = new ActionListAdapter(actions, this, count, play, pause);
         recyclerView.setAdapter(adapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));

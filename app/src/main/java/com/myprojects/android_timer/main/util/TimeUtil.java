@@ -1,4 +1,4 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main.util;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +9,7 @@ public class TimeUtil {
     private LocalDateTime beginning;
     private LocalDateTime end;
 
-    public void increment() {
+    private void increment() {
         sec++;
         if(sec == 60) {
             min++;
@@ -48,11 +48,23 @@ public class TimeUtil {
         return end;
     }
 
-    public void setBeginning(LocalDateTime beginning) {
-        this.beginning = beginning;
+    public Integer getSec() {
+        return sec;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public Integer getMin() {
+        return min;
+    }
+
+    public Integer getHour() {
+        return hour;
+    }
+
+    public void setBeginning() {
+        this.beginning = LocalDateTime.now();
+    }
+
+    public void setEnd() {
+        this.end = LocalDateTime.now();
     }
 }
