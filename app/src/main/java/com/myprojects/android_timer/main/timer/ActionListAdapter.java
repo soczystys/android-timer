@@ -76,7 +76,6 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
         public ConstraintLayout layout;
         public TextView title;
         public FloatingActionButton playButton;
-        public FloatingActionButton saveButton;
 
         public Holder(@NonNull View itemView) {
             super(itemView);

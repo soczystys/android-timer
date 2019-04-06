@@ -1,4 +1,4 @@
-package com.myprojects.android_timer;
+package com.myprojects.android_timer.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
@@ -21,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab_record_time);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabRecord = findViewById(R.id.fab_record_time);
+        fabRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -31,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton save = findViewById(R.id.fab_show_logs);
-        save.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabLogs = findViewById(R.id.fab_show_logs);
+        fabLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), LogsActivity.class));
+                startActivity(new Intent(getApplicationContext(), LogsActivity.class));
             }
         });
     }

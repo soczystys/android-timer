@@ -2,6 +2,7 @@ package com.myprojects.android_timer.main.util;
 
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,7 +35,6 @@ public class ButtonProperty {
     }
 
     public void setTask(final TextView textView) {
-        timeUtil.setBeginning();
         task = new TimerTask() {
             @Override
             public void run() {
@@ -59,7 +59,6 @@ public class ButtonProperty {
         if (isReadyToCancel) {
             timer.cancel();
         }
-        timeUtil.setEnd();
     }
 
     public void clearTime() {

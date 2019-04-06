@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.myprojects.android_timer.R;
-import com.myprojects.android_timer.main.data.DataSource;
+import com.myprojects.android_timer.main.data.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,32 +26,32 @@ public class TimerActivity extends AppCompatActivity {
     private FloatingActionButton saveButton;
     private RecyclerView recyclerView;
     private ActionListAdapter adapter;
-    private DataSource dataSource;
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         initResources();
-        count = findViewById(R.id.main_text);
         initList();
         initRecyclerView();
         initSaveButton();
-        dataSource = DataSource.getInstance();
     }
 
     private void initSaveButton() {
         saveButton = findViewById(R.id.fab_save);
+        db = new DatabaseHelper(this);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataSource.setLog(adapter.getBunchOfDataToSave());
+                db.setLog(adapter.getBunchOfDataToSave());
             }
         });
     }
 
     private void initResources() {
         resources = getResources();
+        count = findViewById(R.id.main_text);
         play = resources.getDrawable(R.drawable.play_no_circle, getTheme());
         pause = resources.getDrawable(R.drawable.pause_no_circle, getTheme());
     }

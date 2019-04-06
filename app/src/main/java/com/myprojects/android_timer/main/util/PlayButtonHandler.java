@@ -4,18 +4,19 @@ import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayButtonHandler {
 
-    private Boolean isAboutToPlayNow = false;
-    private boolean isCancelled = false;
     private Map<FloatingActionButton, ButtonProperty> buttonsHandlers = new HashMap<>();
     private FloatingActionButton buttonPreviouslyClicked;
     private FloatingActionButton buttonCurrentlyClicked;
+    private Boolean previouslyPlayed = false;
     private Drawable play;
     private Drawable pause;
+    private Date beginningDate;
 
     public PlayButtonHandler(Drawable play, Drawable pause) {
         this.play = play;
@@ -26,45 +27,45 @@ public class PlayButtonHandler {
         ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
         TimeUtil timeUtil = buttonProperty.getTimeUtil();
         return new BunchOfDataToSave(buttonProperty.getTitle(),
-                timeUtil.getSec(), timeUtil.getMin(), timeUtil.getHour(), timeUtil.getBeginning(), timeUtil.getEnd());
+                beginningDate, new Date(), timeUtil);
     }
 
     public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title) {
         buttonCurrentlyClicked = button;
-        isCancelled = false;
         if (!buttonsHandlers.containsKey(button)) {
             buttonsHandlers.put(button, new ButtonProperty(title));
         }
 
-        changeStatusPlaying();
-        if (isForPlay(button)) {
-            stopAllHandlers(button);
-            play(textView, button);
+        if (isSameAsPreviousClicked()) {
+            if(previouslyPlayed) {
+                stop(button);
+            } else {
+                play(textView, button);
+            }
         } else {
-            stop(isCancelled, button);
+            stop(buttonPreviouslyClicked);
+            clearPrevious();
+            play(textView, button);
+            beginningDate = new Date();
         }
 
         buttonPreviouslyClicked = button;
     }
 
-    private boolean isForPlay(FloatingActionButton button) {
-        if (!button.equals(buttonPreviouslyClicked)) {
+    private void clearPrevious() {
+        for (Map.Entry<FloatingActionButton, ButtonProperty> entry : buttonsHandlers.entrySet()) {
+            if (entry.getKey().equals(buttonPreviouslyClicked)) {
+                entry.getValue().clearTime();
+            }
+        }
+    }
+
+    private boolean isSameAsPreviousClicked() {
+        if (buttonCurrentlyClicked.equals(buttonPreviouslyClicked)) {
             return true;
         }
         else {
-            if (isAboutToPlayNow) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void stopAllHandlers(FloatingActionButton button) {
-        for (Map.Entry<FloatingActionButton, ButtonProperty> entry: buttonsHandlers.entrySet()) {
-            if (!entry.getKey().equals(button)) {
-                entry.getValue().clearTime();
-            }
-            entry.getValue().cancel();
+            return false;
         }
     }
 
@@ -73,18 +74,15 @@ public class PlayButtonHandler {
         buttonProperty.setNewTimer();
         buttonProperty.setTask(textView);
         buttonProperty.scheduleAtFixedRate(0, 1000);
-//        button.setText("stop");
         button.setImageDrawable(pause);
+        previouslyPlayed = true;
     }
 
-    private void stop(boolean isCancelled, final FloatingActionButton button) {
-        stopAllHandlers(button);
-//        button.setText("play");
-
-        button.setImageDrawable(play);
-    }
-
-    private void changeStatusPlaying() {
-        isAboutToPlayNow = !isAboutToPlayNow;
+    private void stop(final FloatingActionButton button) {
+        if (button != null) {
+            buttonsHandlers.get(button).cancel();
+            button.setImageDrawable(play);
+        }
+        previouslyPlayed = false;
     }
 }

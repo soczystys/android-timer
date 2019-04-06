@@ -1,13 +1,9 @@
 package com.myprojects.android_timer.main.util;
 
-import java.time.LocalDateTime;
-
 public class TimeUtil {
     private Integer sec = 0;
     private Integer min = 0;
     private Integer hour = 0;
-    private LocalDateTime beginning;
-    private LocalDateTime end;
 
     private void increment() {
         sec++;
@@ -40,14 +36,6 @@ public class TimeUtil {
         return time;
     }
 
-    public LocalDateTime getBeginning() {
-        return beginning;
-    }
-
-    public LocalDateTime getEnd() {
-        return end;
-    }
-
     public Integer getSec() {
         return sec;
     }
@@ -58,13 +46,5 @@ public class TimeUtil {
 
     public Integer getHour() {
         return hour;
-    }
-
-    public void setBeginning() {
-        this.beginning = LocalDateTime.now();
-    }
-
-    public void setEnd() {
-        this.end = LocalDateTime.now();
     }
 }
