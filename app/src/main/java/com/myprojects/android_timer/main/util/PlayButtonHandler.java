@@ -1,8 +1,9 @@
 package com.myprojects.android_timer.main.util;
 
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
 import java.util.HashMap;

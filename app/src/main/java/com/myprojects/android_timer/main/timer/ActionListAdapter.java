@@ -2,16 +2,17 @@ package com.myprojects.android_timer.main.timer;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.util.BunchOfDataToSave;
 import com.myprojects.android_timer.main.util.PlayButtonHandler;
@@ -21,11 +22,11 @@ import java.util.List;
 public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Holder> {
 
     final List<RecyclerItem> list;
-    Context context;
-    TextView count;
+    private Context context;
+    private TextView count;
     final PlayButtonHandler playButtonHandler;
-    Drawable play;
-    Drawable pause;
+    private Drawable play;
+    private Drawable pause;
 
     public BunchOfDataToSave getBunchOfDataToSave() {
         if(playButtonHandler != null) {

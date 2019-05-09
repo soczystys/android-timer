@@ -1,15 +1,15 @@
 package com.myprojects.android_timer.main.logs;
 
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.myprojects.android_timer.R;
-import com.myprojects.android_timer.main.timer.ActionListAdapter;
 
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LogHolder logHolder, int i) {
-        final ActionLog reference = logs.get(i);
+    public void onBindViewHolder(@NonNull LogHolder logHolder, int position) {
+        final ActionLog reference = logs.get(position);
         logHolder.title.setText(reference.getTitle());
         logHolder.startDateTitle.setText("start date:");
         logHolder.startDateField.setText(reference.getBeginningDate());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/log_item_layout"
@@ -8,76 +8,78 @@
 
     <TextView
         android:id="@+id/text_log_title"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_log_time_title"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/text_log_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_log_title" />
 
     <TextView
         android:id="@+id/text_log_time_field"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:layout_marginStart="16dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_log_title"
         app:layout_constraintTop_toTopOf="@+id/text_log_time_title" />
 
     <TextView
         android:id="@+id/text_log_start_date_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/text_log_time_title"
         app:layout_constraintStart_toStartOf="@+id/text_log_time_title"
         app:layout_constraintTop_toBottomOf="@+id/text_log_time_title" />
 
     <TextView
         android:id="@+id/text_log_start_date_field"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/text_log_time_field"
         app:layout_constraintStart_toStartOf="@+id/text_log_time_field"
         app:layout_constraintTop_toTopOf="@+id/text_log_start_date_title" />
 
     <TextView
         android:id="@+id/text_log_end_date_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/text_log_start_date_title"
         app:layout_constraintStart_toStartOf="@+id/text_log_start_date_title"
         app:layout_constraintTop_toBottomOf="@+id/text_log_start_date_title" />
 
     <TextView
         android:id="@+id/text_log_end_date_field"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/text_log_start_date_field"
         app:layout_constraintStart_toStartOf="@+id/text_log_start_date_field"
         app:layout_constraintTop_toTopOf="@+id/text_log_end_date_title" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,9 @@
 package com.myprojects.android_timer.main.util;
 
-import android.icu.util.GregorianCalendar;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.Timer;
 
 public class BunchOfDataToSave {
     private String title;

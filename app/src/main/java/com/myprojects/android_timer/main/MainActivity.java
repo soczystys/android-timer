@@ -2,14 +2,16 @@ package com.myprojects.android_timer.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.actions.ActionsActivity;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+//                        .setAction("ActionEntity", null).show();
                 startActivity(new Intent(getApplicationContext(), TimerActivity.class));
             }
         });
@@ -37,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LogsActivity.class));
+            }
+        });
+
+        FloatingActionButton fabActions = findViewById(R.id.fab_show_actions);
+        fabActions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ActionsActivity.class));
             }
         });
     }
