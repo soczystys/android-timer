@@ -34,6 +34,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getMainChartData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = (Cursor) db.query( TABLE_NAME,new String[]{COL_2,"count(*)"}, null,null, COL_2, null, null);
+        return res;
+    }
+
     public boolean setLog(BunchOfDataToSave bunchOfDataToSave) {
 //        logs.add(bunchOfDataToSave);
         SQLiteDatabase db = this.getWritableDatabase();

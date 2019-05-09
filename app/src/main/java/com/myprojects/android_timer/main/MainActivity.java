@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.chart.MainChartActivity;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LogsActivity.class));
+            }
+        });
+
+        FloatingActionButton fabChart = findViewById(R.id.mainChart);
+        fabChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MainChartActivity.class));
             }
         });
     }
