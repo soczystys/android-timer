@@ -15,13 +15,13 @@ import com.myprojects.android_timer.main.data.newdata.dao.LogDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
-@Database(entities = {ActionEntity.class, LogEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {ActionEntity.class, LogEntity.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+
+    private static final String TAG = "AppDatabase";
 
     public abstract LogDao getLogDao();
     public abstract ActionDao getActionDao();
-
-    private static final String TAG = "app_database";
 
     private static AppDatabase instance;
 
@@ -59,7 +59,6 @@ public abstract class AppDatabase extends RoomDatabase {
             actionDao.insert(new ActionEntity("nauka", "twoje zadania związane z nauką"));
             actionDao.insert(new ActionEntity("czytanie", "bardzo ważna umiejetność"));
             actionDao.insert(new ActionEntity("sen", "Przeciętny człowiek potrzebuje około 7h snu"));
-            Log.d(TAG, "doInBackground: init list size -> " + actionDao.getAll().getValue().size());
             return null;
         }
     }

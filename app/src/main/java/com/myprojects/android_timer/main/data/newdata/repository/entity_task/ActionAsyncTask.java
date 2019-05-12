@@ -1,6 +1,7 @@
 package com.myprojects.android_timer.main.data.newdata.repository.entity_task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.myprojects.android_timer.main.data.newdata.dao.ActionDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
@@ -9,6 +10,8 @@ import com.myprojects.android_timer.main.data.newdata.repository.operation_type.
 public class ActionAsyncTask extends AsyncTask<ActionEntity, Void, Void> {
     private OperationType operationType;
     private ActionDao actionDao;
+
+    private static final String TAG = "ActionAsyncTask";
 
     public ActionAsyncTask(ActionDao actionDao, OperationType operationType) {
         this.operationType = operationType;
@@ -30,6 +33,7 @@ public class ActionAsyncTask extends AsyncTask<ActionEntity, Void, Void> {
             case DELETE_ALL:
                 actionDao.deleteAll();
         }
+        Log.d(TAG, "doInBackground: done");
         return null;
     }
 }

@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 
@@ -29,16 +32,18 @@ public class ActionsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final ActionsActivityAdapter adapter = new ActionsActivityAdapter();
-        viewModel = ViewModelProviders.of(this).get(ActionsViewModel.class);
         recyclerView.setAdapter(adapter);
+        viewModel = ViewModelProviders.of(this).get(ActionsViewModel.class);
         viewModel.getAllActions().observe(this, new Observer<List<ActionEntity>>() {
             @Override
             public void onChanged(List<ActionEntity> actionEntities) {
                 adapter.setList(actionEntities);
             }
         });
-//        adapter.setList(viewModel.getAllActions().getValue());
-
-//        adapter.setList(viewModel.getAllActions().getValue());
+        FloatingActionButton fab = findViewById(R.id.fab_show_count);
+        fab.setOnClickListener((view) -> {
+            Snackbar.make(view, "Count: " + adapter.getItemCount(), Snackbar.LENGTH_LONG)
+                    .setAction("ActionEntity", null).show();
+        });
     }
 }

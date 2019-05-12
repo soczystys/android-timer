@@ -8,10 +8,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.actions.ActionsActivity;
+import com.myprojects.android_timer.main.data.roomexample.activityexample.ExampleActivity;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fabRecord = findViewById(R.id.fab_record_time);
+        CardView fabRecord = findViewById(R.id.fab_record_time);
         fabRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fabLogs = findViewById(R.id.fab_show_logs);
+        CardView fabLogs = findViewById(R.id.fab_show_logs);
         fabLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fabActions = findViewById(R.id.fab_show_actions);
+        CardView fabActions = findViewById(R.id.fab_show_actions);
         fabActions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
