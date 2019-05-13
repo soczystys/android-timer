@@ -17,7 +17,7 @@ public interface LogDao {
     @Query("SELECT * FROM LOG_TABLE")
     LiveData<List<LogEntity>> getAll();
 
-    @Query("SELECT * FROM LOG_TABLE WHERE ACTION_ID LIKE :title")
+    @Query("SELECT * FROM LOG_TABLE WHERE title LIKE :title")
     List<LogEntity> getAllWithTitle(String title);
 
     @Insert
@@ -31,4 +31,5 @@ public interface LogDao {
 
     @Query("DELETE FROM LOG_TABLE")
     void deleteAll();
+
 }

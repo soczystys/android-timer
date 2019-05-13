@@ -15,57 +15,32 @@ foreignKeys = @ForeignKey(entity = ActionEntity.class,
                             onDelete = CASCADE))
 public class LogEntity {
 
+    public LogEntity(int actionId, String title, String dateTimeStart, String dateTimeEnd, String timeRecorded) {
+        this.actionId = actionId;
+        this.title = title;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.timeRecorded = timeRecorded;
+    }
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
     private int id;
 
-//    @Index("ACTION_ID")
     @ColumnInfo(name = "ACTION_ID", index = true)
     private int actionId;
 
-    @ColumnInfo(name = "DATE_TIME_START_SECONDS")
-    private String dateTimeStartSeconds;
+    @ColumnInfo(name = "TITLE")
+    private String title;
 
-    @ColumnInfo(name = "DATE_TIME_START_MINUTES")
-    private String dateTimeStartMinutes;
+    @ColumnInfo(name = "DATE_TIME_START")
+    private String dateTimeStart;
 
-    @ColumnInfo(name = "DATE_TIME_START_HOURS")
-    private String dateTimeStartHours;
+    @ColumnInfo(name = "DATE_TIME_END")
+    private String dateTimeEnd;
 
-    @ColumnInfo(name = "DATE_TIME_END_SECONDS")
-    private String dateTimeEndSeconds;
-
-    @ColumnInfo(name = "DATE_TIME_END_MINUTES")
-    private String dateTimeEndMinutes;
-
-    @ColumnInfo(name = "DATE_TIME_END_HOURS")
-    private String dateTimeEndHours;
-
-    @ColumnInfo(name = "TIME_RECORDED_SECONDS")
-    private String timeRecordedSeconds;
-
-    @ColumnInfo(name = "TIME_RECORDED_MINUTES")
-    private String timeRecordedMinutes;
-
-    @ColumnInfo(name = "TIME_RECORDED_HOURS")
-    private String timeRecordedHours;
-
-    public LogEntity(int actionId, String dateTimeStartSeconds,
-                     String dateTimeStartMinutes, String dateTimeStartHours,
-                     String dateTimeEndSeconds, String dateTimeEndMinutes,
-                     String dateTimeEndHours, String timeRecordedSeconds,
-                     String timeRecordedMinutes, String timeRecordedHours) {
-        this.actionId = actionId;
-        this.dateTimeStartSeconds = dateTimeStartSeconds;
-        this.dateTimeStartMinutes = dateTimeStartMinutes;
-        this.dateTimeStartHours = dateTimeStartHours;
-        this.dateTimeEndSeconds = dateTimeEndSeconds;
-        this.dateTimeEndMinutes = dateTimeEndMinutes;
-        this.dateTimeEndHours = dateTimeEndHours;
-        this.timeRecordedSeconds = timeRecordedSeconds;
-        this.timeRecordedMinutes = timeRecordedMinutes;
-        this.timeRecordedHours = timeRecordedHours;
-    }
+    @ColumnInfo(name = "TIME_RECORDED")
+    private String timeRecorded;
 
     public int getId() {
         return id;
@@ -75,83 +50,23 @@ public class LogEntity {
         return actionId;
     }
 
-    public String getDateTimeStartSeconds() {
-        return dateTimeStartSeconds;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDateTimeStartMinutes() {
-        return dateTimeStartMinutes;
+    public String getDateTimeStart() {
+        return dateTimeStart;
     }
 
-    public String getDateTimeStartHours() {
-        return dateTimeStartHours;
+    public String getDateTimeEnd() {
+        return dateTimeEnd;
     }
 
-    public String getDateTimeEndSeconds() {
-        return dateTimeEndSeconds;
-    }
-
-    public String getDateTimeEndMinutes() {
-        return dateTimeEndMinutes;
-    }
-
-    public String getDateTimeEndHours() {
-        return dateTimeEndHours;
-    }
-
-    public String getTimeRecordedSeconds() {
-        return timeRecordedSeconds;
-    }
-
-    public String getTimeRecordedMinutes() {
-        return timeRecordedMinutes;
-    }
-
-    public String getTimeRecordedHours() {
-        return timeRecordedHours;
+    public String getTimeRecorded() {
+        return timeRecorded;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setActionId(int actionId) {
-        this.actionId = actionId;
-    }
-
-    public void setDateTimeStartSeconds(String dateTimeStartSeconds) {
-        this.dateTimeStartSeconds = dateTimeStartSeconds;
-    }
-
-    public void setDateTimeStartMinutes(String dateTimeStartMinutes) {
-        this.dateTimeStartMinutes = dateTimeStartMinutes;
-    }
-
-    public void setDateTimeStartHours(String dateTimeStartHours) {
-        this.dateTimeStartHours = dateTimeStartHours;
-    }
-
-    public void setDateTimeEndSeconds(String dateTimeEndSeconds) {
-        this.dateTimeEndSeconds = dateTimeEndSeconds;
-    }
-
-    public void setDateTimeEndMinutes(String dateTimeEndMinutes) {
-        this.dateTimeEndMinutes = dateTimeEndMinutes;
-    }
-
-    public void setDateTimeEndHours(String dateTimeEndHours) {
-        this.dateTimeEndHours = dateTimeEndHours;
-    }
-
-    public void setTimeRecordedSeconds(String timeRecordedSeconds) {
-        this.timeRecordedSeconds = timeRecordedSeconds;
-    }
-
-    public void setTimeRecordedMinutes(String timeRecordedMinutes) {
-        this.timeRecordedMinutes = timeRecordedMinutes;
-    }
-
-    public void setTimeRecordedHours(String timeRecordedHours) {
-        this.timeRecordedHours = timeRecordedHours;
     }
 }

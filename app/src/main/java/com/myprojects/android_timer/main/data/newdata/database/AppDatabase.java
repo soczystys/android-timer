@@ -15,7 +15,7 @@ import com.myprojects.android_timer.main.data.newdata.dao.LogDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
-@Database(entities = {ActionEntity.class, LogEntity.class}, version = 3, exportSchema = false)
+@Database(entities = {ActionEntity.class, LogEntity.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
@@ -33,6 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     .addCallback(roomCallback)
                     .build();
         }
+        Log.d(TAG, "getInstance: done");
         return instance;
     }
 

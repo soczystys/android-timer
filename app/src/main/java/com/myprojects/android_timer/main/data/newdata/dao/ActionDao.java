@@ -31,4 +31,5 @@ public interface ActionDao {
 
     @Query("DELETE FROM ACTION_TABLE")
     void deleteAll();
+
 }

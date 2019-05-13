@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,9 +42,12 @@ public class ActionsActivity extends AppCompatActivity {
             }
         });
         FloatingActionButton fab = findViewById(R.id.fab_show_count);
-        fab.setOnClickListener((view) -> {
-            Snackbar.make(view, "Count: " + adapter.getItemCount(), Snackbar.LENGTH_LONG)
-                    .setAction("ActionEntity", null).show();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Count: " + adapter.getItemCount(), Snackbar.LENGTH_LONG)
+                        .setAction("ActionEntity", null).show();
+            }
         });
     }
 }
