@@ -15,7 +15,7 @@ import com.myprojects.android_timer.main.data.newdata.dao.LogDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
-@Database(entities = {ActionEntity.class, LogEntity.class}, version = 5, exportSchema = false)
+@Database(entities = {ActionEntity.class, LogEntity.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
@@ -44,6 +44,8 @@ public abstract class AppDatabase extends RoomDatabase {
             new PopulateDbAsyncTask(instance).execute();
         }
     };
+
+
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         //        private NoteDao noteDao;

@@ -15,12 +15,25 @@ foreignKeys = @ForeignKey(entity = ActionEntity.class,
                             onDelete = CASCADE))
 public class LogEntity {
 
-    public LogEntity(int actionId, String title, String dateTimeStart, String dateTimeEnd, String timeRecorded) {
+    public LogEntity(int actionId, int dateTimeStartYear,
+                     int dateTimeStartMonth,
+                     int dateTimeStartDAY,
+                     int dateTimeEndYear,
+                     int dateTimeEndMonth,
+                     int dateTimeEndDay,
+                     int timeRecordedHours,
+                     int timeRecordedMinutes,
+                     int timeRecordedSeconds) {
         this.actionId = actionId;
-        this.title = title;
-        this.dateTimeStart = dateTimeStart;
-        this.dateTimeEnd = dateTimeEnd;
-        this.timeRecorded = timeRecorded;
+        this.dateTimeStartYear = dateTimeStartYear;
+        this.dateTimeStartMonth = dateTimeStartMonth;
+        this.dateTimeStartDAY = dateTimeStartDAY;
+        this.dateTimeEndYear = dateTimeEndYear;
+        this.dateTimeEndMonth = dateTimeEndMonth;
+        this.dateTimeEndDay = dateTimeEndDay;
+        this.timeRecordedHours = timeRecordedHours;
+        this.timeRecordedMinutes = timeRecordedMinutes;
+        this.timeRecordedSeconds = timeRecordedSeconds;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -30,17 +43,32 @@ public class LogEntity {
     @ColumnInfo(name = "ACTION_ID", index = true)
     private int actionId;
 
-    @ColumnInfo(name = "TITLE")
-    private String title;
+    @ColumnInfo(name = "DATE_TIME_START_YEAR")
+    private int dateTimeStartYear;
 
-    @ColumnInfo(name = "DATE_TIME_START")
-    private String dateTimeStart;
+    @ColumnInfo(name = "DATE_TIME_START_MONTH")
+    private int dateTimeStartMonth;
 
-    @ColumnInfo(name = "DATE_TIME_END")
-    private String dateTimeEnd;
+    @ColumnInfo(name = "DATE_TIME_START_DAY")
+    private int dateTimeStartDAY;
 
-    @ColumnInfo(name = "TIME_RECORDED")
-    private String timeRecorded;
+    @ColumnInfo(name = "DATE_TIME_END_YEAR")
+    private int dateTimeEndYear;
+
+    @ColumnInfo(name = "DATE_TIME_END_MONTH")
+    private int dateTimeEndMonth;
+
+    @ColumnInfo(name = "DATE_TIME_END_DAY")
+    private int dateTimeEndDay;
+
+    @ColumnInfo(name = "TIME_RECORDED_HOURS")
+    private int timeRecordedHours;
+
+    @ColumnInfo(name = "TIME_RECORDED_MINUTES")
+    private int timeRecordedMinutes;
+
+    @ColumnInfo(name = "TIME_RECORDED_SECONDS")
+    private int timeRecordedSeconds;
 
     public int getId() {
         return id;
@@ -50,20 +78,40 @@ public class LogEntity {
         return actionId;
     }
 
-    public String getTitle() {
-        return title;
+    public int getDateTimeStartYear() {
+        return dateTimeStartYear;
     }
 
-    public String getDateTimeStart() {
-        return dateTimeStart;
+    public int getDateTimeStartMonth() {
+        return dateTimeStartMonth;
     }
 
-    public String getDateTimeEnd() {
-        return dateTimeEnd;
+    public int getDateTimeStartDAY() {
+        return dateTimeStartDAY;
     }
 
-    public String getTimeRecorded() {
-        return timeRecorded;
+    public int getDateTimeEndYear() {
+        return dateTimeEndYear;
+    }
+
+    public int getDateTimeEndMonth() {
+        return dateTimeEndMonth;
+    }
+
+    public int getDateTimeEndDay() {
+        return dateTimeEndDay;
+    }
+
+    public int getTimeRecordedHours() {
+        return timeRecordedHours;
+    }
+
+    public int getTimeRecordedMinutes() {
+        return timeRecordedMinutes;
+    }
+
+    public int getTimeRecordedSeconds() {
+        return timeRecordedSeconds;
     }
 
     public void setId(int id) {

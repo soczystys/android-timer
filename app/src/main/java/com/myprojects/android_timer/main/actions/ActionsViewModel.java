@@ -25,6 +25,7 @@ public class ActionsViewModel extends AndroidViewModel{
     public void insert(ActionEntity entity) {
         repository.insertAction(entity);
     }
+
     public void delete(ActionEntity entity) {
         repository.deleteAction(entity);
     }

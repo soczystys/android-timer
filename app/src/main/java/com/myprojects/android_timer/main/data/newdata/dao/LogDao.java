@@ -17,8 +17,8 @@ public interface LogDao {
     @Query("SELECT * FROM LOG_TABLE")
     LiveData<List<LogEntity>> getAll();
 
-    @Query("SELECT * FROM LOG_TABLE WHERE title LIKE :title")
-    List<LogEntity> getAllWithTitle(String title);
+    @Query("SELECT * FROM LOG_TABLE WHERE ACTION_ID = :id")
+    List<LogEntity> getAllWithActionId(int id);
 
     @Insert
     void insert(LogEntity... logEntities);

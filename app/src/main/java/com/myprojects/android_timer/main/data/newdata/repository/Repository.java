@@ -59,7 +59,11 @@ public class Repository {
 
     public void deleteAllLogs() {
         new LogAsyncTask(logDao, OperationType.DELETE_ALL).execute(
-                new LogEntity(-1,null,null,null,null));
+//                new LogEntity(-1,null,null,null,null));
+                new LogEntity(-1,1,
+                        1,1,
+                        1,1,
+                        1,1,1,1));
     }
 
     public LiveData<List<LogEntity>> getAllLogs() {
