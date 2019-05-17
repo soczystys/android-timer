@@ -3,23 +3,29 @@ package com.myprojects.android_timer.main.timer;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.actions.ActionsViewModel;
+import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
+import com.myprojects.android_timer.main.data.newdata.repository.Repository;
 import com.myprojects.android_timer.main.data.olddata.DatabaseHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TimerActivity extends AppCompatActivity {
 
-    private List<RecyclerItem> actions;
+    private static final String TAG = "TimerActivity";
+    private List<ActionEntity> actions;
     private TextView count;
     private Resources resources;
     private Drawable play;
@@ -28,6 +34,7 @@ public class TimerActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ActionListAdapter adapter;
     DatabaseHelper db;
+    private ActionsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +73,12 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void initList() {
-        actions = new ArrayList<>();
-        actions.add(new RecyclerItem("sport"));
-        actions.add(new RecyclerItem("praca"));
-        actions.add(new RecyclerItem("nauka"));
-        actions.add(new RecyclerItem("czytanie"));
-        actions.add(new RecyclerItem("jedzenie"));
-        actions.add(new RecyclerItem("leżenie"));
-        actions.add(new RecyclerItem("myślenie"));
-        actions.add(new RecyclerItem("cośtam cośtam"));
+        viewModel = ViewModelProviders.of(this).get(ActionsViewModel.class);
+        viewModel.getAllActions().observe(this, new Observer<List<ActionEntity>>() {
+            @Override
+            public void onChanged(List<ActionEntity> actionEntities) {
+                adapter.setList(actionEntities);
+            }
+        });
     }
 }

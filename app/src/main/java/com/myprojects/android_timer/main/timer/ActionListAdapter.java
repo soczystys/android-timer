@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.util.BunchOfDataToSave;
 import com.myprojects.android_timer.main.util.PlayButtonHandler;
 
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Holder> {
 
-    final List<RecyclerItem> list;
+    List<ActionEntity> list;
     private Context context;
     private TextView count;
     final PlayButtonHandler playButtonHandler;
@@ -36,7 +37,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
         }
     }
 
-    public ActionListAdapter(List<RecyclerItem> list, Context context, TextView count, Drawable play, Drawable pause) {
+    public ActionListAdapter(List<ActionEntity> list, Context context, TextView count, Drawable play, Drawable pause) {
         this.list = list;
         this.context = context;
         this.count = count;
@@ -55,8 +56,8 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        final RecyclerItem reference = list.get(position);
-        holder.title.setText(reference.getTitle());
+        final ActionEntity reference = list.get(position);
+        holder.title.setText(reference.getName());
 
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +69,12 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list == null? 0 : list.size();
+    }
+
+    public void setList(List<ActionEntity> actionEntities) {
+        this.list = actionEntities;
+        notifyDataSetChanged();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

@@ -32,6 +32,20 @@ public class ActionsActivity extends AppCompatActivity {
         instance = this;
         setContentView(R.layout.activity_actions);
         initRecyclerView();
+        iniFab();
+    }
+
+    private void iniFab() {
+        fab = findViewById(R.id.fab_show_count);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addActivityIntent = new Intent(instance, ActionAddActivity.class);
+                addActivityIntent.putStringArrayListExtra("LIST_OF_TITLES",
+                        (ArrayList<String>) getTitlesList());
+                startActivityForResult(addActivityIntent, NEW_ACTION);
+            }
+        });
     }
 
     private void initRecyclerView() {
@@ -47,19 +61,6 @@ public class ActionsActivity extends AppCompatActivity {
                 adapter.setList(actionEntities);
             }
         });
-        fab = findViewById(R.id.fab_show_count);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Count: " + adapter.getItemCount(), Snackbar.LENGTH_LONG)
-                        .setAction("ActionEntity", null).show();
-                Intent addActivityIntent = new Intent(instance, ActionAddActivity.class);
-                addActivityIntent.putStringArrayListExtra("LIST_OF_TITLES",
-                        (ArrayList<String>) getTitlesList());
-                startActivityForResult(addActivityIntent, NEW_ACTION);
-            }
-        });
-
     }
 
     private List<String> getTitlesList() {
