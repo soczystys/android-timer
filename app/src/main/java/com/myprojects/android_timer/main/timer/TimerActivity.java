@@ -3,7 +3,6 @@ package com.myprojects.android_timer.main.timer;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.actions.ActionsViewModel;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
+import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
 import com.myprojects.android_timer.main.data.olddata.DatabaseHelper;
 
@@ -26,6 +26,7 @@ public class TimerActivity extends AppCompatActivity {
 
     private static final String TAG = "TimerActivity";
     private List<ActionEntity> actions;
+    Repository repository;
     private TextView count;
     private Resources resources;
     private Drawable play;
@@ -33,12 +34,13 @@ public class TimerActivity extends AppCompatActivity {
     private FloatingActionButton saveButton;
     private RecyclerView recyclerView;
     private ActionListAdapter adapter;
-    DatabaseHelper db;
+//    DatabaseHelper db;
     private ActionsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        repository = new Repository(getApplication());
         setContentView(R.layout.activity_timer);
         initResources();
         initList();
@@ -48,11 +50,12 @@ public class TimerActivity extends AppCompatActivity {
 
     private void initSaveButton() {
         saveButton = findViewById(R.id.fab_save);
-        db = new DatabaseHelper(this);
+//        db = new DatabaseHelper(this);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.setLog(adapter.getBunchOfDataToSave());
+//                db.setLog(adapter.getBunchOfDataToSave());
+                repository.insertLog(adapter.getBunchOfDataToSave());
             }
         });
     }
@@ -68,7 +71,6 @@ public class TimerActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_main);
         adapter = new ActionListAdapter(actions, this, count, play, pause);
         recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 

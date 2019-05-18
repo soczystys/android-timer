@@ -18,7 +18,13 @@ public interface ActionDao {
     LiveData<List<ActionEntity>> getAll();
 
     @Query("SELECT * FROM ACTION_TABLE WHERE NAME LIKE :name")
-    List<ActionEntity> getAction(String name);
+    ActionEntity getActionByName(String name);
+
+    @Query("SELECT * FROM ACTION_TABLE WHERE ID = :id")
+    ActionEntity getActionById(int id);
+
+    @Query("SELECT * FROM ACTION_TABLE")
+    List<ActionEntity> getActions();
 
     @Insert
     void insert(ActionEntity... entities);

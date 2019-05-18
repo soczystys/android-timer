@@ -1,5 +1,6 @@
 package com.myprojects.android_timer.main.logs;
 
+import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,23 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myprojects.android_timer.R;
+import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
+import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
+import com.myprojects.android_timer.main.data.newdata.repository.Repository;
 
 import java.util.List;
 
 public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolder> {
 
-    List<ActionLog> logs;
+//    List<ActionLog> logs;
+    List<ActionEntity> actions;
+    List<LogEntity> logs;
+    Repository repository;
 
-    public LogListAdapter(List<ActionLog> logs) {
-        this.logs = logs;
+    public LogListAdapter(Application application) {
+        repository = new Repository(application);
+        this.actions = repository.getActions();
+        this.logs = repository.getLogs();
     }
 
     @NonNull
@@ -31,14 +40,15 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolde
 
     @Override
     public void onBindViewHolder(@NonNull LogHolder logHolder, int position) {
-        final ActionLog reference = logs.get(position);
-        logHolder.title.setText(reference.getTitle());
+        final LogEntity reference = logs.get(position);
+        logHolder.title.setText(repository.getActionNameByLogId(reference.getId()));
+
         logHolder.startDateTitle.setText("start date:");
-        logHolder.startDateField.setText(reference.getBeginningDate());
+        logHolder.startDateField.setText(reference.getStartDateAsString());
         logHolder.endDateTitle.setText("end date:");
-        logHolder.endDateField.setText(reference.getEndDate());
+        logHolder.endDateField.setText(reference.getEndDateAsString());
         logHolder.timeTitle.setText("total time:");
-        logHolder.timeField.setText(reference.getTime());
+        logHolder.timeField.setText(reference.getTotalTimeAsString());
     }
 
     @Override

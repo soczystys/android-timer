@@ -10,10 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.actions.ActionsActivity;
-import com.myprojects.android_timer.main.data.roomexample.activityexample.ExampleActivity;
+import com.myprojects.android_timer.main.chart.ChartActivity;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
@@ -53,7 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ActionsActivity.class));
             }
         });
+
+        CardView charts = findViewById(R.id.main_charts);
+        charts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ChartActivity.class));
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

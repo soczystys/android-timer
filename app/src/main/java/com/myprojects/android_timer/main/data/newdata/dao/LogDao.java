@@ -20,6 +20,12 @@ public interface LogDao {
     @Query("SELECT * FROM LOG_TABLE WHERE ACTION_ID = :id")
     List<LogEntity> getAllWithActionId(int id);
 
+    @Query("SELECT * FROM LOG_TABLE")
+    List<LogEntity> getLogs();
+
+    @Query("SELECT * FROM LOG_TABLE WHERE ID = :id")
+    LogEntity getLogById(int id);
+
     @Insert
     void insert(LogEntity... logEntities);
 

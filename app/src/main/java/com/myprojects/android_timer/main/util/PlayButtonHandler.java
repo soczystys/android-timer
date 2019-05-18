@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,17 +19,28 @@ public class PlayButtonHandler {
     private Drawable play;
     private Drawable pause;
     private Date beginningDate;
+    private int actionId;
 
     public PlayButtonHandler(Drawable play, Drawable pause) {
         this.play = play;
         this.pause = pause;
     }
 
-    public BunchOfDataToSave getBunchOfDataToSave() {
+    public LogEntity getBunchOfDataToSave() {
         ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
         TimeUtil timeUtil = buttonProperty.getTimeUtil();
-        return new BunchOfDataToSave(buttonProperty.getTitle(),
-                beginningDate, new Date(), timeUtil);
+        Date endDate = new Date();
+        return new LogEntity(
+                actionId,
+                beginningDate.getYear(),
+                beginningDate.getMonth(),
+                beginningDate.getDay(),
+                endDate.getYear(),
+                endDate.getMonth(),
+                endDate.getDay(),
+                timeUtil.getHour(),
+                timeUtil.getMin(),
+                timeUtil.getSec());
     }
 
     public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title) {
@@ -85,5 +97,9 @@ public class PlayButtonHandler {
             button.setImageDrawable(play);
         }
         previouslyPlayed = false;
+    }
+
+    public void setActionId(int actionId) {
+        this.actionId = actionId;
     }
 }

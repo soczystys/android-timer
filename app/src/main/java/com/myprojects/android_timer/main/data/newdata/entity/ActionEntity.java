@@ -82,4 +82,13 @@ public class ActionEntity implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
     }
+
+    @Override
+    public String toString() {
+        return "ActionEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

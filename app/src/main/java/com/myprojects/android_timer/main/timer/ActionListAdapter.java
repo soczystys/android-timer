@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
+import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.util.BunchOfDataToSave;
 import com.myprojects.android_timer.main.util.PlayButtonHandler;
 
@@ -29,7 +30,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     private Drawable play;
     private Drawable pause;
 
-    public BunchOfDataToSave getBunchOfDataToSave() {
+    public LogEntity getBunchOfDataToSave() {
         if(playButtonHandler != null) {
             return playButtonHandler.getBunchOfDataToSave();
         } else {
@@ -58,7 +59,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         final ActionEntity reference = list.get(position);
         holder.title.setText(reference.getName());
-
+        playButtonHandler.setActionId(reference.getId());
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,6 +6,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.myprojects.android_timer.main.util.BunchOfDataToSave;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "LOG_TABLE",
@@ -116,5 +118,46 @@ public class LogEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "LogEntity{" +
+                "id=" + id +
+                ", actionId=" + actionId +
+                ", dateTimeStartYear=" + dateTimeStartYear +
+                ", dateTimeStartMonth=" + dateTimeStartMonth +
+                ", dateTimeStartDAY=" + dateTimeStartDAY +
+                ", dateTimeEndYear=" + dateTimeEndYear +
+                ", dateTimeEndMonth=" + dateTimeEndMonth +
+                ", dateTimeEndDay=" + dateTimeEndDay +
+                ", timeRecordedHours=" + timeRecordedHours +
+                ", timeRecordedMinutes=" + timeRecordedMinutes +
+                ", timeRecordedSeconds=" + timeRecordedSeconds +
+                '}';
+    }
+
+    public String getStartDateAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(dateTimeStartYear).append("-")
+                .append(dateTimeStartMonth / 10).append(dateTimeStartMonth % 10).append("-")
+                .append(dateTimeStartDAY / 10).append(dateTimeStartDAY % 10);
+        return stringBuilder.toString();
+    }
+
+    public String getEndDateAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(dateTimeEndYear).append("-")
+                .append(dateTimeEndMonth / 10).append(dateTimeEndMonth % 10).append("-")
+                .append(dateTimeEndDay / 10).append(dateTimeEndDay % 10);
+        return stringBuilder.toString();
+    }
+
+    public String getTotalTimeAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(timeRecordedHours).append(":")
+                .append(timeRecordedMinutes / 10).append( timeRecordedMinutes % 10).append(":")
+                .append(timeRecordedSeconds / 10).append( timeRecordedSeconds % 10);
+        return stringBuilder.toString();
     }
 }

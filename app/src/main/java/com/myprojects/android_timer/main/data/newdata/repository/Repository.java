@@ -10,10 +10,14 @@ import com.myprojects.android_timer.main.data.newdata.database.AppDatabase;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.entity_task.ActionAsyncTask;
+import com.myprojects.android_timer.main.data.newdata.repository.entity_task.GetActionTable;
+import com.myprojects.android_timer.main.data.newdata.repository.entity_task.GetLogTable;
 import com.myprojects.android_timer.main.data.newdata.repository.entity_task.LogAsyncTask;
+import com.myprojects.android_timer.main.data.newdata.repository.entity_task.getActionNameByLogIdAsyncTask;
 import com.myprojects.android_timer.main.data.newdata.repository.operation_type.OperationType;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class Repository {
     private ActionDao actionDao;
@@ -27,6 +31,47 @@ public class Repository {
         logDao = appDatabase.getLogDao();
         allActions = actionDao.getAll();
         allLogs = logDao.getAll();
+    }
+
+//    public ActionEntity getActionById(int id) {
+//        return actionDao.getActionById(id);
+
+//    }
+
+//    public LogEntity getLogById(int id) {
+//        return logDao.getLogById(id);
+//    }
+    public String getActionNameByLogId(int id) {
+        try {
+            return new getActionNameByLogIdAsyncTask(actionDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ActionEntity> getActions() {
+        try {
+            return new GetActionTable(actionDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<LogEntity> getLogs() {
+        try {
+            return new GetLogTable(logDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void insertAction(ActionEntity... entities) {
