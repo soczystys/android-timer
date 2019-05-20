@@ -59,11 +59,10 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         final ActionEntity reference = list.get(position);
         holder.title.setText(reference.getName());
-        playButtonHandler.setActionId(reference.getId());
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playButtonHandler.handlePlayButton(count, holder.playButton, holder.title.getText().toString());
+                playButtonHandler.handlePlayButton(count, holder.playButton, holder.title.getText().toString(), reference.getId());
             }
         });
     }

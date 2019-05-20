@@ -62,4 +62,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
+    //library for pie chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

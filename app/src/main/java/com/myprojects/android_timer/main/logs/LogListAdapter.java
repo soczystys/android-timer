@@ -19,7 +19,6 @@ import java.util.List;
 
 public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolder> {
 
-//    List<ActionLog> logs;
     List<ActionEntity> actions;
     List<LogEntity> logs;
     Repository repository;
@@ -41,7 +40,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolde
     @Override
     public void onBindViewHolder(@NonNull LogHolder logHolder, int position) {
         final LogEntity reference = logs.get(position);
-        logHolder.title.setText(repository.getActionNameByLogId(reference.getId()));
+        logHolder.title.setText(getActionNameById(reference.getActionId()));
 
         logHolder.startDateTitle.setText("start date:");
         logHolder.startDateField.setText(reference.getStartDateAsString());
@@ -49,6 +48,15 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolde
         logHolder.endDateField.setText(reference.getEndDateAsString());
         logHolder.timeTitle.setText("total time:");
         logHolder.timeField.setText(reference.getTotalTimeAsString());
+    }
+
+    private String getActionNameById(int id) {
+        for (ActionEntity entity: actions) {
+            if (entity.getId() == id) {
+                return entity.getName();
+            }
+        }
+        return null;
     }
 
     @Override

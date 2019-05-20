@@ -43,7 +43,8 @@ public class PlayButtonHandler {
                 timeUtil.getSec());
     }
 
-    public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title) {
+    public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title, int actionId) {
+        setActionId(actionId);
         buttonCurrentlyClicked = button;
         if (!buttonsHandlers.containsKey(button)) {
             buttonsHandlers.put(button, new ButtonProperty(title));
