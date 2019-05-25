@@ -1,7 +1,5 @@
 package com.myprojects.android_timer.main.actions;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 
 public class ActionsActivityAdapter extends RecyclerView.Adapter<ActionsActivityAdapter.Holder>{
