@@ -16,9 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.actions.ActionsViewModel;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
-import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
-import com.myprojects.android_timer.main.data.olddata.DatabaseHelper;
 
 import java.util.List;
 
@@ -34,7 +32,6 @@ public class TimerActivity extends AppCompatActivity {
     private FloatingActionButton saveButton;
     private RecyclerView recyclerView;
     private ActionListAdapter adapter;
-//    DatabaseHelper db;
     private ActionsViewModel viewModel;
 
     @Override
@@ -50,11 +47,9 @@ public class TimerActivity extends AppCompatActivity {
 
     private void initSaveButton() {
         saveButton = findViewById(R.id.fab_save);
-//        db = new DatabaseHelper(this);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                db.setLog(adapter.getBunchOfDataToSave());
                 repository.insertLog(adapter.getBunchOfDataToSave());
             }
         });

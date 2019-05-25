@@ -15,7 +15,6 @@ import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
-import com.myprojects.android_timer.main.data.olddata.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

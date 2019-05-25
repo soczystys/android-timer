@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class PlayButtonHandler {
     private Boolean previouslyPlayed = false;
     private Drawable play;
     private Drawable pause;
-    private Date beginningDate;
+    private LocalDateTime beginningDate;
     private int actionId;
 
     public PlayButtonHandler(Drawable play, Drawable pause) {
@@ -29,15 +30,15 @@ public class PlayButtonHandler {
     public LogEntity getBunchOfDataToSave() {
         ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
         TimeUtil timeUtil = buttonProperty.getTimeUtil();
-        Date endDate = new Date();
+        LocalDateTime endDate = LocalDateTime.now();
         return new LogEntity(
                 actionId,
                 beginningDate.getYear(),
-                beginningDate.getMonth(),
-                beginningDate.getDay(),
+                beginningDate.getMonthValue(),
+                beginningDate.getDayOfMonth(),
                 endDate.getYear(),
-                endDate.getMonth(),
-                endDate.getDay(),
+                endDate.getMonthValue(),
+                endDate.getDayOfMonth(),
                 timeUtil.getHour(),
                 timeUtil.getMin(),
                 timeUtil.getSec());
@@ -60,7 +61,7 @@ public class PlayButtonHandler {
             stop(buttonPreviouslyClicked);
             clearPrevious();
             play(textView, button);
-            beginningDate = new Date();
+            beginningDate = LocalDateTime.now();
         }
 
         buttonPreviouslyClicked = button;

@@ -1,6 +1,5 @@
 package com.myprojects.android_timer.main.logs;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
-import com.myprojects.android_timer.main.data.olddata.DatabaseHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LogsActivity extends AppCompatActivity {

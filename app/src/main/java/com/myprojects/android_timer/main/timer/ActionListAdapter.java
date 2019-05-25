@@ -16,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
-import com.myprojects.android_timer.main.util.BunchOfDataToSave;
 import com.myprojects.android_timer.main.util.PlayButtonHandler;
 
 import java.util.List;
