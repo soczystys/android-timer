@@ -4,16 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
-
 import java.util.List;
 
-
+/**
+ * Adapter for {@link RecyclerView} in {@link ActionsActivity}.
+ */
 public class ActionsActivityAdapter extends RecyclerView.Adapter<ActionsActivityAdapter.Holder>{
 
     private List<ActionEntity> list;

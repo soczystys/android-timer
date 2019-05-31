@@ -11,6 +11,10 @@ import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 
 import java.util.List;
 
+/**
+ * @see ActionEntity
+ * @see com.myprojects.android_timer.main.data.newdata.database.AppDatabase
+ */
 @Dao
 public interface ActionDao {
 

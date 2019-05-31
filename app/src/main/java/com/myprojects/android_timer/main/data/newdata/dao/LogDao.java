@@ -11,6 +11,10 @@ import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
 import java.util.List;
 
+/**
+ * @see LogEntity
+ * @see com.myprojects.android_timer.main.data.newdata.database.AppDatabase
+ */
 @Dao
 public interface LogDao {
 

@@ -1,16 +1,17 @@
 package com.myprojects.android_timer.main.actions;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
-
 import java.util.List;
 
+/**
+ * @see ActionsActivity
+ * @see ActionAddActivity
+ */
 public class ActionsViewModel extends AndroidViewModel{
 
     private Repository repository;

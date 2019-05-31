@@ -10,15 +10,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link android.app.Activity} where u can see all saved
+ * {@link com.myprojects.android_timer.main.data.newdata.entity.ActionEntity} listed.
+ */
 public class ActionsActivity extends AppCompatActivity {
     private static final int NEW_ACTION = 229;
     private ActionsViewModel viewModel;
@@ -31,10 +33,10 @@ public class ActionsActivity extends AppCompatActivity {
         instance = this;
         setContentView(R.layout.activity_actions);
         initRecyclerView();
-        iniFab();
+        initFab();
     }
 
-    private void iniFab() {
+    private void initFab() {
         fab = findViewById(R.id.fab_show_count);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,9 @@ public class ActionsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets {@link LinearLayoutManager}, {@link ActionsActivityAdapter} and {@link ActionsViewModel}.
+     */
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.activity_actions_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -62,6 +67,9 @@ public class ActionsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * @return list of valid {@link ActionEntity}
+     */
     private List<String> getTitlesList() {
         List<String> list = new ArrayList<>();
         List<ActionEntity> actions = viewModel.getAllActions().getValue();

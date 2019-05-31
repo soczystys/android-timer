@@ -1,5 +1,8 @@
 package com.myprojects.android_timer.main.util;
 
+/**
+ * class responsible for operations on time in timer
+ */
 public class TimeUtil {
     private Integer sec = 0;
     private Integer min = 0;
@@ -18,10 +21,17 @@ public class TimeUtil {
         }
     }
 
+    /**
+     * sets time to default values
+     */
     public void clear() {
         sec = min = hour = 0;
     }
 
+    /**
+     * formats time to String
+     * @return String representation in format hh:mm:ss
+     */
     public String getTimeRepresentation() {
         StringBuilder b = new StringBuilder();
         b.append(
@@ -31,6 +41,10 @@ public class TimeUtil {
         return b.toString();
     }
 
+    /**
+     * increments time and invokes getTimeRepresantation method
+     * @return String representation in format hh:mm:ss
+     */
     public String getTimeRepresentationAndIncrement() {
         timeRepresentation = getTimeRepresentation();
         increment();

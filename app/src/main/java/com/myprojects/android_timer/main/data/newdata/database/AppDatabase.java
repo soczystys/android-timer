@@ -3,18 +3,21 @@ package com.myprojects.android_timer.main.data.newdata.database;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
 import com.myprojects.android_timer.main.data.newdata.dao.ActionDao;
 import com.myprojects.android_timer.main.data.newdata.dao.LogDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 
+/**
+ * @see ActionDao
+ * @see LogDao
+ * @see com.myprojects.android_timer.main.data.newdata.repository.Repository
+ */
 @Database(entities = {ActionEntity.class, LogEntity.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 

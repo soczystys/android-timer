@@ -7,6 +7,9 @@ import com.myprojects.android_timer.main.data.newdata.dao.ActionDao;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.operation_type.OperationType;
 
+/**
+ * Handles CRUD operations on {@link ActionDao}, depending on {@link OperationType}
+ */
 public class ActionAsyncTask extends AsyncTask<ActionEntity, Void, Void> {
     private OperationType operationType;
     private ActionDao actionDao;

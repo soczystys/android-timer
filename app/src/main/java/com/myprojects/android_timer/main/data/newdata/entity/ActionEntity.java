@@ -2,13 +2,16 @@ package com.myprojects.android_timer.main.data.newdata.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import java.util.Objects;
 
+/**
+ * Table of entities that represent Actions you can record.
+ * @see LogEntity
+ * The relation {@link ActionEntity} - {@link LogEntity} is one to many.
+ */
 @Entity(tableName = "ACTION_TABLE")
 public class ActionEntity implements Parcelable {
 

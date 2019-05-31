@@ -3,13 +3,14 @@ package com.myprojects.android_timer.main.data.newdata.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
-
-import com.myprojects.android_timer.main.util.BunchOfDataToSave;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+/**
+ * Table of entities that are saved as a time recorded
+ * @see ActionEntity
+ */
 @Entity(tableName = "LOG_TABLE",
 foreignKeys = @ForeignKey(entity = ActionEntity.class,
                             parentColumns = "ID",

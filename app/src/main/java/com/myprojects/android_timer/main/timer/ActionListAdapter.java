@@ -5,19 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
-
-
 import java.util.List;
 
+/**
+ * {@link RecyclerView.Adapter} for {@link RecyclerView} in {@link TimerActivity}.
+ */
 public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Holder> {
 
     List<ActionEntity> list;
@@ -25,6 +24,10 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     private Drawable pause;
     BoundService boundService;
 
+    /**
+     * @see BoundService
+     * @return data of time recorded to save
+     */
     public LogEntity getBunchOfDataToSave() {
         if(boundService != null) {
             return boundService.getBunchOfDataToSave();
@@ -66,7 +69,6 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     public int getItemCount() {
         return list == null? 0 : list.size();
     }
-
     public void setList(List<ActionEntity> actionEntities) {
         this.list = actionEntities;
         notifyDataSetChanged();
@@ -75,14 +77,12 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
     public class Holder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
-//        public ConstraintLayout layout;
         public TextView title;
         public FloatingActionButton playButton;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.card_item);
-//            layout = itemView.findViewById(R.id.card_layout);
             title = itemView.findViewById(R.id.card_title);
             playButton = itemView.findViewById(R.id.fab_play);
         }
@@ -92,6 +92,10 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Ho
         this.boundService = boundService;
     }
 
+    /**
+     * if time was already counted, method changes icon of the proper button to pause icon
+     * when opening {@link TimerActivity}.
+     */
     public void updateView() {
         if (boundService != null) {
             this.notifyItemChanged(list.indexOf(boundService.getActionCurrentlyClicked()));

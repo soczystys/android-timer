@@ -1,12 +1,13 @@
 package com.myprojects.android_timer.main.data.newdata.repository.entity_task;
 
 import android.os.AsyncTask;
-
 import com.myprojects.android_timer.main.data.newdata.dao.LogDao;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.operation_type.OperationType;
 
-
+/**
+ * Handles CRUD operations on {@link LogDao}, depending on {@link OperationType}
+ */
 public class LogAsyncTask extends AsyncTask<LogEntity, Void, Void> {
     private OperationType operationType;
     private LogDao logDao;

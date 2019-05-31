@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
@@ -17,6 +15,9 @@ import com.myprojects.android_timer.main.data.newdata.repository.Repository;
 
 import java.util.List;
 
+/**
+ * Adapter for {@link RecyclerView} in {@link LogsActivity}.
+ */
 public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolder> {
 
     List<ActionEntity> actions;
@@ -50,6 +51,11 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogHolde
         logHolder.timeField.setText(reference.getTotalTimeAsString());
     }
 
+    /**
+     * searches for {@link ActionEntity} in {@link LogListAdapter#actions} with a given id. Returns null in case of not finding.
+     * @param id
+     * @return
+     */
     private String getActionNameById(int id) {
         for (ActionEntity entity: actions) {
             if (entity.getId() == id) {

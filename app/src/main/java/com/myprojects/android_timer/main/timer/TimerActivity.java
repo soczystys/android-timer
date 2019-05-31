@@ -1,5 +1,6 @@
 package com.myprojects.android_timer.main.timer;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,21 +9,20 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
-
 import java.util.List;
 
+/**
+ * {@link android.app.Activity} for recording time
+ */
 public class TimerActivity extends AppCompatActivity {
 
     private static final String TAG = "TimerActivity";
@@ -46,6 +46,10 @@ public class TimerActivity extends AppCompatActivity {
         initList();
         initRecyclerView();
     }
+
+    /**
+     * sets resources, count, saveButton, play and pause
+     */
     private void initResources() {
         resources = getResources();
         count = findViewById(R.id.main_text);
@@ -53,12 +57,21 @@ public class TimerActivity extends AppCompatActivity {
         play = resources.getDrawable(R.drawable.play_no_circle, getTheme());
         pause = resources.getDrawable(R.drawable.pause_no_circle, getTheme());
     }
+
+    /**
+     * sets {@link RecyclerView} and adds {@link ActionListAdapter} to it
+     */
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recycler_main);
         adapter = new ActionListAdapter(actions, play, pause);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
+
+    /**
+     * Loads list. Should be used before {@link android.app.Activity} is running - in methods,
+     * such as {@link android.app.Activity#onCreate(Bundle)}, {@link Activity#onStart()}, {@link Activity#onResume()}
+     */
     private void initList() {
         actions = repository.getActions();
     }

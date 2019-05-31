@@ -7,20 +7,23 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
 import com.myprojects.android_timer.main.util.TimeUtil;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Service used to count time even when application isn't on the foreground
+ * and print info when {@link TimerActivity} is active
+ * @see TimerActivity
+ * @see ActionListAdapter
+ */
 public class BoundService extends Service {
     private final IBinder binder = new LocalBinder();
     private static TimeUtil timeUtil = new TimeUtil();
@@ -29,7 +32,23 @@ public class BoundService extends Service {
     private static String timeString = "00:00:00";
     private static boolean cycle = false;
 
-
+    private static Boolean previouslyPlayed = false;
+    private static LocalDateTime beginningDate;
+    private static Drawable play;
+    private static Drawable pause;
+    /**
+     * Remembers the {@link ActionEntity} represented by the clicked button before last clicked
+     */
+    private static ActionEntity actionPreviouslyClicked;
+    /**
+     * Remembers the {@link ActionEntity} represented by the last clicked button
+     */
+    private static ActionEntity actionCurrentlyClicked;
+    /**
+     * Connects actionEntities with buttons represent them.
+     * @see ActionEntity
+     */
+    private static Map<ActionEntity, FloatingActionButton> buttonsHandlers = new HashMap<>();
 
     private static final String TAG = "BoundService";
 
@@ -39,13 +58,19 @@ public class BoundService extends Service {
         return binder;
     }
 
+    /**
+     * sets time to 00:00:00, and updates {@link BoundService#textView}. Doesn't interefere with {@link BoundService#startTicking()}, or {@link BoundService#pause()}.
+     * @see TimeUtil#clear()
+     * @see BoundService#printText()
+     */
     public void clear() {
         timeUtil.clear();
         printText();
-        Log.d(TAG, "clear: should print actual string");
-        Log.d(TAG, "clear: textView: " + textView);
     }
 
+    /**
+     * updates {@link BoundService#textView} with the current {@link BoundService#timeString}
+     */
     public void printText() {
         if (textView != null) {
             textView.post(new Runnable() {
@@ -53,25 +78,29 @@ public class BoundService extends Service {
                 public void run() {
                     timeString = timeUtil.getTimeRepresentation();
                     textView.setText(timeString);
-//                    Log.d(TAG, "print text");
                 }
             });
         }
     }
-
     public void init() {
         printText();
         if (isCycle()) {
             startTicking();
         }
     }
-
     public class LocalBinder extends Binder {
-
         BoundService getService() {
             return BoundService.this;
         }
+
     }
+
+    /**
+     * starts counting time. Updates {@link BoundService#textView} with the time when service is bounded.
+     * Otherwise only increments time.
+     * @see TimeUtil
+     * @see BoundService#pause()
+     */
     public void startTicking() {
         pause();
         timer = new Timer();
@@ -86,6 +115,11 @@ public class BoundService extends Service {
         cycle = true;
     }
 
+    /**
+     * stops incrementing time
+     * @see TimeUtil
+     * @see BoundService#startTicking()
+     */
     public void pause() {
         if (timer != null) {
             timer.cancel();
@@ -94,39 +128,36 @@ public class BoundService extends Service {
         cycle = false;
     }
 
+    /**
+     * sets textView on which time will be displayed
+     * @param textView set {@link TextView} ready to display text.
+     * @see BoundService#printText()
+     */
     public void setTextView(TextView textView) {
         this.textView = textView;
     }
 
-    public String getTimeString() {
-        return timeString;
-    }
-
+    /**
+     * @return true if time is counted
+     */
     public static boolean isCycle() {
         return cycle;
     }
 
-
-
-    //from PlayButtonHandler properties
-
-    private static Boolean previouslyPlayed = false;
-    private static LocalDateTime beginningDate;
-    private static Drawable play;
-    private static Drawable pause;
-    private static ActionEntity actionPreviouslyClicked;
-    private static ActionEntity actionCurrentlyClicked;
+    /**
+     * sets icons that will be displayed depending whether button is played or paused.
+     * @param play icon that is displayed when the button is paused.
+     * @param pause icon that is displayed when the button is played.
+     */
     public void setDrawable(Drawable play, Drawable pause) {
         this.play = play;
         this.pause = pause;
-        Log.d(TAG, String.valueOf(actionCurrentlyClicked));
-        Log.d(TAG, String.valueOf(actionPreviouslyClicked));
-        Log.d(TAG, String.valueOf(previouslyPlayed));
-        Log.d(TAG, String.valueOf(buttonsHandlers));
     }
 
-    private static Map<ActionEntity, FloatingActionButton> buttonsHandlers = new HashMap<>();
-
+    /**
+     * Saves time recorded as {@link LogEntity}
+     * @return data to save in database.
+     */
     public LogEntity getBunchOfDataToSave() {
         LocalDateTime endDate = LocalDateTime.now();
         return new LogEntity(
@@ -142,7 +173,13 @@ public class BoundService extends Service {
                 timeUtil.getSec());
     }
 
-
+    /**
+     * Invoked when button to play is cliked. Decides whether to pause, play button, or to clear time.
+     * Should be used in setOnClickListener of the play button.
+     * It manages changing icons after click, deciding whether time should be counted or paused and setting {@link BoundService#beginningDate} for saving purposes.
+     * @param button the FloatingActionButton that is clicked
+     * @param actionEntity name of ActionEntity that the button represents.
+     */
     public void handlePlayButton(final FloatingActionButton button, ActionEntity actionEntity) {
         actionCurrentlyClicked = actionEntity;
         if (!buttonsHandlers.containsKey(actionEntity)) {
@@ -175,12 +212,7 @@ public class BoundService extends Service {
     }
 
     private boolean isSameAsPreviousClicked() {
-        if (actionCurrentlyClicked.equals(actionPreviouslyClicked)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (actionCurrentlyClicked.equals(actionPreviouslyClicked)) ? true: false;
     }
 
     public static ActionEntity getActionCurrentlyClicked() {

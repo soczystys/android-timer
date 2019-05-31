@@ -5,17 +5,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-
 import com.myprojects.android_timer.R;
 import com.myprojects.android_timer.main.actions.ActionsActivity;
 import com.myprojects.android_timer.main.chart.ChartActivity;
 import com.myprojects.android_timer.main.logs.LogsActivity;
 import com.myprojects.android_timer.main.timer.TimerActivity;
 
+/**
+ * @see TimerActivity
+ * @see LogsActivity
+ * @see ActionsActivity
+ * @see ChartActivity
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
