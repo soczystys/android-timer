@@ -1,3 +1,4 @@
+/*
 package com.myprojects.android_timer.main.util;
 
 import android.widget.TextView;
@@ -7,12 +8,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ButtonProperty {
-    private Timer timer;
-    private TimerTask task = null;
-    private Runnable runnable = null;
-    private Boolean isReadyToCancel = false;
-    private TimeUtil timeUtil = new TimeUtil();
-    private String title;
+//    private Timer timer;
+//    private TimerTask task = null;
+//    private Runnable runnable = null;
+//    private Boolean isReadyToCancel = false;
+//    private TimeUtil timeUtil = new TimeUtil();
+//    private String title;
 
     public ButtonProperty(String title) {
         this.title = title;
@@ -77,3 +78,4 @@ public class ButtonProperty {
         return title;
     }
 }
+*/

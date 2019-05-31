@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorCard">#1C9C91</color>
     <color name="blueDark">#25368A</color>
+    <color name="lightgray">#dedede</color>
 </resources>

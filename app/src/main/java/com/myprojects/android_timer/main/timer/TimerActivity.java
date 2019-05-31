@@ -1,20 +1,23 @@
 package com.myprojects.android_timer.main.timer;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.R;
-import com.myprojects.android_timer.main.actions.ActionsViewModel;
 import com.myprojects.android_timer.main.data.newdata.entity.ActionEntity;
 import com.myprojects.android_timer.main.data.newdata.repository.Repository;
 
@@ -32,8 +35,8 @@ public class TimerActivity extends AppCompatActivity {
     private FloatingActionButton saveButton;
     private RecyclerView recyclerView;
     private ActionListAdapter adapter;
-    private ActionsViewModel viewModel;
-
+    protected BoundService mService;
+    protected boolean mBound = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,40 +45,61 @@ public class TimerActivity extends AppCompatActivity {
         initResources();
         initList();
         initRecyclerView();
-        initSaveButton();
     }
-
-    private void initSaveButton() {
-        saveButton = findViewById(R.id.fab_save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                repository.insertLog(adapter.getBunchOfDataToSave());
-            }
-        });
-    }
-
     private void initResources() {
         resources = getResources();
         count = findViewById(R.id.main_text);
+        saveButton = findViewById(R.id.fab_save);
         play = resources.getDrawable(R.drawable.play_no_circle, getTheme());
         pause = resources.getDrawable(R.drawable.pause_no_circle, getTheme());
     }
-
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recycler_main);
-        adapter = new ActionListAdapter(actions, this, count, play, pause);
+        adapter = new ActionListAdapter(actions, play, pause);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
-
     private void initList() {
-        viewModel = ViewModelProviders.of(this).get(ActionsViewModel.class);
-        viewModel.getAllActions().observe(this, new Observer<List<ActionEntity>>() {
-            @Override
-            public void onChanged(List<ActionEntity> actionEntities) {
-                adapter.setList(actionEntities);
-            }
-        });
+        actions = repository.getActions();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, BoundService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            BoundService.LocalBinder binder = (BoundService.LocalBinder) service;
+            mService = binder.getService();
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    repository.insertLog(adapter.getBunchOfDataToSave());
+                    mService.clear();
+                }
+            });
+            mService.init();
+            mBound = true;
+            mService.setTextView(count);
+            mService.setDrawable(play, pause);
+            adapter.setBoundService(mService);
+            adapter.updateView();
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+
 }

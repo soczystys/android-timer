@@ -1,3 +1,4 @@
+/*
 package com.myprojects.android_timer.main.util;
 
 import android.graphics.drawable.Drawable;
@@ -5,6 +6,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.myprojects.android_timer.main.data.newdata.entity.LogEntity;
+import com.myprojects.android_timer.main.timer.BoundService;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -13,14 +15,15 @@ import java.util.Map;
 
 public class PlayButtonHandler {
 
-    private Map<FloatingActionButton, ButtonProperty> buttonsHandlers = new HashMap<>();
+//    private Map<FloatingActionButton, ButtonProperty> buttonsHandlers = new HashMap<>();
     private FloatingActionButton buttonPreviouslyClicked;
     private FloatingActionButton buttonCurrentlyClicked;
     private Boolean previouslyPlayed = false;
+    private LocalDateTime beginningDate;
     private Drawable play;
     private Drawable pause;
-    private LocalDateTime beginningDate;
     private int actionId;
+    private BoundService boundService;
 
     public PlayButtonHandler(Drawable play, Drawable pause) {
         this.play = play;
@@ -28,8 +31,8 @@ public class PlayButtonHandler {
     }
 
     public LogEntity getBunchOfDataToSave() {
-        ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
-        TimeUtil timeUtil = buttonProperty.getTimeUtil();
+//        ButtonProperty buttonProperty = buttonsHandlers.get(buttonCurrentlyClicked);
+//        TimeUtil timeUtil = buttonProperty.getTimeUtil();
         LocalDateTime endDate = LocalDateTime.now();
         return new LogEntity(
                 actionId,
@@ -39,28 +42,34 @@ public class PlayButtonHandler {
                 endDate.getYear(),
                 endDate.getMonthValue(),
                 endDate.getDayOfMonth(),
-                timeUtil.getHour(),
-                timeUtil.getMin(),
-                timeUtil.getSec());
+//                timeUtil.getHour(),
+//                timeUtil.getMin(),
+//                timeUtil.getSec());
     }
 
     public void handlePlayButton(final TextView textView, final FloatingActionButton button, String title, int actionId) {
         setActionId(actionId);
         buttonCurrentlyClicked = button;
-        if (!buttonsHandlers.containsKey(button)) {
-            buttonsHandlers.put(button, new ButtonProperty(title));
-        }
+//        if (!buttonsHandlers.containsKey(button)) {
+//            buttonsHandlers.put(button, new ButtonProperty(title));
+//        }
 
         if (isSameAsPreviousClicked()) {
             if(previouslyPlayed) {
-                stop(button);
+//                stop(button);
+                button.setImageDrawable(play);
+                boundService.pause();
             } else {
-                play(textView, button);
+//                play(textView, button);
+                button.setImageDrawable(pause);
+                boundService.startTicking();
             }
         } else {
-            stop(buttonPreviouslyClicked);
+//            stop(buttonPreviouslyClicked);
             clearPrevious();
-            play(textView, button);
+//            play(textView, button);
+            button.setImageDrawable(pause);
+            boundService.startTicking();
             beginningDate = LocalDateTime.now();
         }
 
@@ -68,9 +77,9 @@ public class PlayButtonHandler {
     }
 
     private void clearPrevious() {
-        for (Map.Entry<FloatingActionButton, ButtonProperty> entry : buttonsHandlers.entrySet()) {
-            if (entry.getKey().equals(buttonPreviouslyClicked)) {
-                entry.getValue().clearTime();
+//        for (Map.Entry<FloatingActionButton, ButtonProperty> entry : buttonsHandlers.entrySet()) {
+//            if (entry.getKey().equals(buttonPreviouslyClicked)) {
+//                entry.getValue().clearTime();
             }
         }
     }
@@ -104,4 +113,9 @@ public class PlayButtonHandler {
     public void setActionId(int actionId) {
         this.actionId = actionId;
     }
+
+    public void setBoundService(BoundService boundService) {
+        this.boundService = boundService;
+    }
 }
+*/

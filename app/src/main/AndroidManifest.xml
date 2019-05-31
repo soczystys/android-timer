@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".main.chart.ChartActivity"></activity>
         <activity android:name=".main.actions.ActionAddActivity" />
-        <activity android:name=".main.data.roomexample.activityexample.ExampleActivity" />
+        <service android:name=".main.timer.BoundService"></service>
         <activity android:name=".main.actions.ActionsActivity" />
         <activity android:name=".main.logs.LogsActivity" />
         <activity android:name=".main.timer.TimerActivity" />

@@ -4,6 +4,7 @@ public class TimeUtil {
     private Integer sec = 0;
     private Integer min = 0;
     private Integer hour = 0;
+    String timeRepresentation = "";
 
     private void increment() {
         sec++;
@@ -31,9 +32,9 @@ public class TimeUtil {
     }
 
     public String getTimeRepresentationAndIncrement() {
-        String time = getTimeRepresentation();
+        timeRepresentation = getTimeRepresentation();
         increment();
-        return time;
+        return timeRepresentation;
     }
 
     public Integer getSec() {
